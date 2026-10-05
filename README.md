@@ -1,4 +1,4 @@
-<img width="1391" height="2000" alt="CAPA_LIVRO_LIDAR_INGLES" src="https://github.com/user-attachments/assets/fe49d072-2a5e-41bb-9353-e763947e121d" />
+<img width="696" height="1000" alt="CAPA_LIVRO_LIDAR_INGLES" src="https://github.com/user-attachments/assets/fe49d072-2a5e-41bb-9353-e763947e121d" />
 
 License of Use: LiDAR Applications for Forest Inventory: An Area-Based Approach
 
@@ -12,4 +12,3 @@ Dalla Corte, A. P. et al. LiDAR Applications for Forest Inventory: An Area-Based
 Curitiba: Authors' Edition, 2026. PDF
 ISBN: 978-65-02-26084-5
 DOI:
-<img width="1391" height="2000" alt="CAPA_LIVRO_LIDAR_INGLES" src="https://github.com/user-attachments/assets/fe49d072-2a5e-41bb-9353-e763947e121d" />
