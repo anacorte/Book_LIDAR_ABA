@@ -11,4 +11,4 @@ Any use of this material requires full citation, as follows:
 Dalla Corte, A. P. et al. LiDAR Applications for Forest Inventory: An Area-Based Approach [e-book]
 Curitiba: Authors' Edition, 2026. PDF
 ISBN: 978-65-02-26084-5
-DOI:
+DOI: 10.5281/zenodo.23286614
