@@ -20,6 +20,11 @@
 
 ---
 
+✉️ Get the book
+To receive a copy directly from the team, please fill out the official form: 👉 https://forms.gle/QSid4o35PUiYA3qZ8 
+We kindly ask that you do not share the file directly. If anyone is interested, please send them the form link instead.
+
+---
 
 License of Use: LiDAR Applications for Forest Inventory: An Area-Based Approach
 
