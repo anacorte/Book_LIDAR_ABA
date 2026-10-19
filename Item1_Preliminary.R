@@ -38,8 +38,8 @@ require("rlang")
 
 # Opening and inspecting the point cloud
 las_data <- readLAS("Item1_Preliminary/Item_1_LiDAR_Data/lidar_data.las",
-                    select = "xyzia")
-plot(las_data, bg = "white", color = "Intensity", legend = FALSE)
+                    select = "xyzia") # Use select = "xyziarn" to also load ReturnNumber (r) and NumberOfReturns (n)
+plot(las_data, bg = "white", color = "Z", legend = FALSE)
 
 # Inspecting the header of the data
 las_head <- head(las_data@data)

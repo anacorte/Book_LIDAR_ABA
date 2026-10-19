@@ -20,6 +20,7 @@ setwd("C:/Lidar_Book")
 
 # Shared theme of the observed versus estimated plots
 book_theme <- function() {
+  require(ggplot2)
   theme_bw() +
     theme(text        = element_text(colour = "black", family = "Times", size = 12),
           axis.text.x = element_text(colour = "black", family = "Times", size = 12),
@@ -89,9 +90,10 @@ rmse_vol <- round(rmse(model_data$VT, model_data$volume_est), 4)
 bias_vol <- round(bias(model_data$VT, model_data$volume_est), 4)
 
 # Plot with the statistics developed
+par(mar = c(5, 5.5, 1.5, 1.5))
 plot(model_data$VT, model_data$volume_est,
-     xlab = expression("Total volume (m"^3*" ha"^-1*")"),
-     ylab = expression("Estimated volume (m"^3*" ha"^-1*")"))
+     xlab = expression("Observed VT (m"^3*" ha"^-1*")"),
+     ylab = expression("Estimated VT (m"^3*" ha"^-1*")"))
 abline(0, 1)
 # Annotation positions relative to the plot extent
 usr <- par("usr")
@@ -134,9 +136,10 @@ rmse_ba <- round(rmse(model_data$BA, model_data$basal_area_est), 4)
 bias_ba <- round(bias(model_data$BA, model_data$basal_area_est), 4)
 
 # Plot with the statistics developed
+par(mar = c(5, 5.5, 1.5, 1.5))
 plot(model_data$BA, model_data$basal_area_est,
-     xlab = expression("Basal area (m"^2*" ha"^-1*")"),
-     ylab = expression("Estimated basal area (m"^2*" ha"^-1*")"))
+     xlab = expression("Observed BA (m"^2*" ha"^-1*")"),
+     ylab = expression("Estimated BA (m"^2*" ha"^-1*")"))
 abline(0, 1)
 # Annotation positions relative to the plot extent
 usr <- par("usr")
@@ -179,9 +182,10 @@ rmse_bio <- round(rmse(model_data$AGB, model_data$biomass_est), 4)
 bias_bio <- round(bias(model_data$AGB, model_data$biomass_est), 4)
 
 # Plot with the statistics developed
+par(mar = c(5, 5.5, 1.5, 1.5))
 plot(model_data$AGB, model_data$biomass_est,
-     xlab = expression("Biomass (Mg ha"^-1*")"),
-     ylab = expression("Estimated biomass (Mg ha"^-1*")"))
+     xlab = expression("Observed AGB (Mg ha"^-1*")"),
+     ylab = expression("Estimated AGB (Mg ha"^-1*")"))
 abline(0, 1)
 # Annotation positions relative to the plot extent
 usr <- par("usr")
@@ -214,9 +218,9 @@ summary(rstandard(lm_biomass))
 # Independence of the residuals (Durbin-Watson)
 # H0: there is no correlation between the residuals - they are independent (p > 0.05)
 # H1: there is correlation between the residuals - they are not independent (p <= 0.05)
-car::durbinWatsonTest(lm_volume)
-car::durbinWatsonTest(lm_ba)
-car::durbinWatsonTest(lm_biomass)
+set.seed(123); car::durbinWatsonTest(lm_volume)
+set.seed(123); car::durbinWatsonTest(lm_ba)
+set.seed(123); car::durbinWatsonTest(lm_biomass)
 
 # Homoscedasticity (Breusch-Pagan)
 # H0: there is homoscedasticity    (p > 0.05)
@@ -245,9 +249,9 @@ vif_safe(lm_biomass)
 max_vol <- max(model_data$VT, model_data$volume_est, na.rm = TRUE)
 lim_vol <- ceiling(max_vol / 10) * 10
 
-g_volume <- ggplot(model_data, aes(x = volume_est, y = VT)) +
-  labs(x = expression("Estimated volume (m"^3*" ha"^-1*")"),
-       y = expression("Observed volume (m"^3*" ha"^-1*")")) +
+g_volume <- ggplot(model_data, aes(x = VT, y = volume_est)) +
+  labs(x = expression("Observed VT (m"^3*" ha"^-1*")"),
+       y = expression("Estimated VT (m"^3*" ha"^-1*")")) +
   geom_point() +
   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
   geom_smooth(method = lm, se = FALSE, color = "red", linewidth = 0.8) +
@@ -260,9 +264,9 @@ print(g_volume)
 max_ba <- max(model_data$BA, model_data$basal_area_est, na.rm = TRUE)
 lim_ba <- ceiling(max_ba / 10) * 10
 
-g_ba <- ggplot(model_data, aes(x = basal_area_est, y = BA)) +
-  labs(x = expression("Estimated basal area (m"^2*" ha"^-1*")"),
-       y = expression("Observed basal area (m"^2*" ha"^-1*")")) +
+g_ba <- ggplot(model_data, aes(x = BA, y = basal_area_est)) +
+  labs(x = expression("Observed BA (m"^2*" ha"^-1*")"),
+       y = expression("Estimated BA (m"^2*" ha"^-1*")")) +
   geom_point() +
   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
   geom_smooth(method = lm, se = FALSE, color = "red", linewidth = 0.8) +
@@ -274,9 +278,9 @@ print(g_ba)
 max_bio <- max(model_data$AGB, model_data$biomass_est, na.rm = TRUE)
 lim_bio <- ceiling(max_bio / 10) * 10
 
-g_biomass <- ggplot(model_data, aes(x = biomass_est, y = AGB)) +
-  labs(x = expression("Estimated biomass (Mg ha"^-1*")"),
-       y = expression("Observed biomass (Mg ha"^-1*")")) +
+g_biomass <- ggplot(model_data, aes(x = AGB, y = biomass_est)) +
+  labs(x = expression("Observed AGB (Mg ha"^-1*")"),
+       y = expression("Estimated AGB (Mg ha"^-1*")")) +
   geom_point() +
   geom_abline(intercept = 0, slope = 1, linetype = "dashed") +
   geom_smooth(method = lm, se = FALSE, color = "red", linewidth = 0.8) +
@@ -327,9 +331,9 @@ ba_map      <- predict(metrics_raster, lm_ba,      na.rm = TRUE)
 biomass_map <- predict(metrics_raster, lm_biomass, na.rm = TRUE)
 
 # Spatializing the information calculated for the area of interest
-plot(volume_map,  main = expression("Spatialization - Volume (m"^3*" ha"^-1*")"))
-plot(ba_map,      main = expression("Spatialization - Basal area (m"^2*" ha"^-1*")"))
-plot(biomass_map, main = expression("Spatialization - Biomass (Mg ha"^-1*")"))
+plot(volume_map,  main = expression("Estimated VT (m"^3*" ha"^-1*")"))
+plot(ba_map,      main = expression("Estimated BA (m"^2*" ha"^-1*")"))
+plot(biomass_map, main = expression("Estimated AGB (Mg ha"^-1*")"))
 
 # Saving the output rasters
 writeRaster(volume_map,

@@ -28,6 +28,8 @@ require(sf)
 # Opening and inspecting the point cloud
 las_norm <- readLAS("Item2_Metrics/Item_2_LiDAR_Data/normalized_cloud.las")
 las_check(las_norm)
+# Load the normalized point cloud (Z = height above ground), add
+# filter = "-drop_z_below 0" to readLAS() to remove points below 0 m
 
 # Clipping the cloud to the area of interest - sample plot
 # Option 1 - clipping with a shapefile
